@@ -77,7 +77,7 @@ void print(char** tokens){
 void user(){
   char* c = malloc(sizeof(char));
   printf("$ ");
-  gets(c);
+  scanf("%[^\n]%*c", c);
   argtok(c);
 }
 

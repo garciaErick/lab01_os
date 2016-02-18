@@ -3,8 +3,7 @@ TARGET  = egarcia_argtok   # executable
 HEADERS = egarcia_argtok.h # headers with signatures
 OBJECTS = egarcia_argtok.o # All the object files
 CC      = gcc              # Compiler
-#Compilation Flags
-CFLAGS  = -c -Wno-deprecated-declarations
+CFLAGS  = -c 
 
 #Make all will target the default target which is the executable
 #declared above
@@ -21,6 +20,7 @@ $(TARGET): $(OBJECTS)
 
 run: $(TARGET)
 	./$(TARGET)
+
 #Removing all of the files except the .c
 clean:
 	-rm -f *.o
