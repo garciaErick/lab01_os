@@ -1,11 +1,4 @@
 #include "egarcia_argtok.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-int main(){
-  user(); //Ask for user input
-  return 0;
-}
 
 char** argtok(char* c){
   char **tokens; //Create our array of char* pointing to char*
@@ -64,6 +57,7 @@ char** count_tokens(char* c){
   return r;
 }
 
+/* Print all of the tokens (words) in the char** */ 
 void print(char** tokens){
   int i, j;
   for(i = 0; tokens[i] != NULL; i++){      //If null we are done
@@ -74,10 +68,10 @@ void print(char** tokens){
   }
 }
 
+/* Get input from user */
 void user(){
   char* c = malloc(sizeof(char));
   printf("$ ");
   scanf("%[^\n]%*c", c);
   argtok(c);
 }
-

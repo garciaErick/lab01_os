@@ -1,9 +1,9 @@
 #All the dependencies for this project
 TARGET  = egarcia_argtok   # executable
 HEADERS = egarcia_argtok.h # headers with signatures
-OBJECTS = egarcia_argtok.o # All the object files
+OBJECTS = egarcia_lab1.c egarcia_argtok.o # All the object files
 CC      = gcc              # Compiler
-CFLAGS  = -c 
+CFLAGS  = -c 						   #Compiler flags
 
 #Make all will target the default target which is the executable
 #declared above
@@ -14,10 +14,12 @@ all: default
 $(TARGET): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@
 
-#Compiling the object files that our executable is dependent on 
+#Compiling all the object files that our executable is dependent on:
+#egarcia_argtok.c and egarcia_lab1.c with the header egarcia_argtok.h
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) $< -o $@
 
+#Run make run to execute the target
 run: $(TARGET)
 	./$(TARGET)
 
@@ -25,4 +27,3 @@ run: $(TARGET)
 clean:
 	-rm -f *.o
 	-rm -f $(TARGET)
-

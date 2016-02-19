@@ -1,5 +1,7 @@
 #ifndef EGARCIA_ARGTOK_H_ 
 #define EGARCIA_ARGTOK_H_
+#include <stdio.h>
+#include <stdlib.h>
 
 /* argtok():       Argument tokenizer                */
 /* strcopy():      My own implementation of strcopy  */
