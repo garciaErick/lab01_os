@@ -1,8 +1,20 @@
+/**
+  * @author Erick Garcia egarcia87@miners.utep.edu
+  * @desc This class will get an input from the user
+  *   and tokenize it
+  * @required egarcia_argtok.h
+*/
 #include "egarcia_argtok.h"
 
+/**Func argtok 
+ * @desc  Tokenize a string into a **char of *char
+ * @param  c      = string we want to tokenize 
+ * @return tokens = the tokenized string
+ */
 char** argtok(char* c){
   char **tokens; //Create our array of char* pointing to char*
-  tokens    = count_tokens(c); //Counting our tokens and allocating memory
+  int no_of_tokens = count_tokens(c); //Counting our tokens 
+  tokens    = (char**)calloc(no_of_tokens + 1, sizeof(char*));  //Add one for the '\0'
   int count = 0;
   int index = 0;
   int i     = 0;
@@ -21,15 +33,21 @@ char** argtok(char* c){
     count++;
   }
   /* Print our tokenized string */
-  print(tokens);
   return tokens;
 }
 
-/* Copies a word of specified index and size from our source string into a destination */
+/** func strcopy
+  * @desc  Implementation of strcopy from source to destination
+  * @param source       = complete source string from user
+  * @param destination  = is our destination char*
+  * @param index        = the index of the word we want to tokenize
+  * @param size         = the size of the word we want to tokenize
+  * @return destination = the copy of our source string
+*/
 char* strcopy(char* source, char* destination, int index, int size){
   // Allocate memmory for the size of the string we are going to copy 
-  destination = malloc(sizeof(char) * (size));
-  int i_source;   // Keep track of where we are in the source string
+  destination = (char*)malloc(size * (sizeof(char)));
+  int i_source = index;   // Keep track of where we are in the source string
   int i_dest = 0; // Keep track of where we are in the dest string
   int max = (i_source + size); //Copying only a word from the source string
   for(i_source = index; i_source < max; i_source++, i_dest++){
@@ -39,13 +57,12 @@ char* strcopy(char* source, char* destination, int index, int size){
   return destination;
 }
 
-/*
- Number of tokens = {
- number of spaces,
- one '\0', 
- one to set our last index to NULL}
-*/
-char** count_tokens(char* c){
+/** func    count_tokens
+  * @desc   Count the number of tokens in a string  
+  * @param  c     = string we want to count tokens from
+  * @return count = number of tokens counting space and '\0' 
+ */
+int count_tokens(char* c){
   int i; 
   int count = 0;
   for(i = 0; c[i] != '\0'; i++){
@@ -53,8 +70,8 @@ char** count_tokens(char* c){
       count++;
     }
   }
-  char **r = calloc(count + 2, sizeof(char*));
-  return r;
+  /* char **r = (char**)calloc(count + 2, sizeof(char*)); */
+  return count + 2;
 }
 
 /* Print all of the tokens (words) in the char** */ 
@@ -68,10 +85,15 @@ void print(char** tokens){
   }
 }
 
-/* Get input from user */
-void user(){
-  char* c = malloc(sizeof(char));
-  printf("$ ");
-  scanf("%[^\n]%*c", c);
-  argtok(c);
+/** func   freeMemory
+ * @desc   Since we are using malloc/calloc we have to free memory
+ * from the heap
+ * @param  tokens = **char that we will free
+ */
+void freeMemory(char** tokens){
+  int i;
+  for(i = 0; tokens[i] != NULL; i++){      //If null we are done
+    free(tokens[i]);
+  }
+  free(tokens);
 }

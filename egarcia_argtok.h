@@ -7,13 +7,12 @@
 /* strcopy():      My own implementation of strcopy  */
 /* count_tokens(): Counting Number of Tokens (Words) */
 /* print():        Printing tokenized string         */
-/* user():         Get User input                    */
 
 char** argtok(char*);
 char*  strcopy(char* source, char* destination, int index, int size);
-char** count_tokens(char* c);
+int    count_tokens(char* c);
 void   print(char**);
-void   user();
+void   freeMemory(char**) ;
 
 #endif //EGARCIA_ARGTOK_H_ 
 
